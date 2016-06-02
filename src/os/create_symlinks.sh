@@ -71,10 +71,9 @@ main() {
 
         fi
 
-        execute "source $targetFile"
-
     done
 
+    execute "source ~/.bashrc"
 }
 
 main "$@"
