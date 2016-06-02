@@ -244,7 +244,7 @@ main() {
 
   fi
 
-  ./create_symbolic_links.sh
+  ./create_symlinks.sh
   ./install_applications.sh
   ./setup_vim.sh
 
