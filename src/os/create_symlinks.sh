@@ -7,6 +7,9 @@ cd "$(dirname "${BASH_SOURCE[0]}")" \
 
 declare -a FILES_TO_SYMLINK=(
   # BASH
+  "bash/bash"
+  "bash/bashrc"
+  "bash/bash_profile"
 
   # GIT
 
