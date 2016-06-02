@@ -73,7 +73,6 @@ main() {
 
     done
 
-    execute "source ~/.bashrc"
 }
 
 main "$@"
