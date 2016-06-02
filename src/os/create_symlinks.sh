@@ -71,6 +71,8 @@ main() {
 
         fi
 
+        execute "source $targetFile"
+
     done
 
 }
