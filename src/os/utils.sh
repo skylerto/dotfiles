@@ -17,6 +17,28 @@ brew_installed() {
   cmd_exists "brew"
 }
 
+answer_is_yes() {
+    [[ "$REPLY" =~ ^[Yy]$ ]] \
+        && return 0 \
+        || return 1
+}
+
+get_answer() {
+    printf "%s" "$REPLY"
+}
+
+ask() {
+    print_question "$1"
+    read -r
+}
+
+
+ask_for_confirmation() {
+    print_question "$1 (y/n) "
+    read -r -n 1
+    printf "\n"
+}
+
 execute() {
 
     local tmpFile="$(mktemp /tmp/XXXXX)"
@@ -73,4 +95,19 @@ print_error() {
   print_in_red "  [✖] $1 $2\n"
 }
 
+print_info() {
+    print_in_purple "\n $1\n\n"
+}
 
+print_in_purple() {
+    printf "\e[0;35m%b\e[0m" "$1"
+}
+
+print_question() {
+    print_in_yellow "  [?] $1"
+}
+
+
+print_in_yellow() {
+    printf "\e[0;33m%b\e[0m" "$1"
+}
