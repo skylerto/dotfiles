@@ -17,6 +17,30 @@ brew_installed() {
   cmd_exists "brew"
 }
 
+execute() {
+
+    local tmpFile="$(mktemp /tmp/XXXXX)"
+    local exitCode=0
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    eval "$1" \
+        &> /dev/null \
+        2> "$tmpFile"
+
+    print_result $? "${2:-$1}"
+    exitCode=$?
+
+    if [ $exitCode -ne 0 ]; then
+        print_error_stream "↳ ERROR:" < "$tmpFile"
+    fi
+
+    rm -rf "$tmpFile"
+
+    return $exitCode
+
+}
+
 
 
 # - - - - -
