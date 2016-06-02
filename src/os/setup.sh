@@ -248,8 +248,9 @@ main() {
   ./install_applications.sh
   ./setup_vim.sh
 
-  print_in_green "Don't forget to source ~/.bashrc !\n"
-  execute "source ~/.bashrc"
+  #print_in_green "Don't forget to source ~/.bashrc !\n"
+  #execute "source ~/.bashrc"
+  exec bash
 
 }
 
