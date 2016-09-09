@@ -5,12 +5,7 @@ if command -v hub > /dev/null; then
   alias git=hub
 fi
 
-if ls --version | grep -q GNU; then
-  eval `dircolors ~/.dir_colors`
-  alias ls='ls --color=auto'
-else
-  alias ls='ls -G'
-fi
+alias ls='ls -G'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -76,3 +71,4 @@ alias   del="rmtrash"
 alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
 
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias vim="nvim"

@@ -22,14 +22,16 @@ if [[ -d $GOPATH ]]; then
   PATH="$PATH:$GOPATH/bin"
 fi
 
+export PATH=$(npm bin):$PATH
+
 # Use gnu utils instead of os x
 if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" 
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages                        
-export VAGRANT_DEFAULT_PROVIDER="vmware_fusion" 
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
 
 export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date
 "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date
