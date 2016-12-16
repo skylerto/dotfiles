@@ -17,22 +17,29 @@ if [[ -d $HOME/.bin ]]; then
 fi
 
 export GOPATH=~/work
+export PATH=$PATH:/Users/skylerl/.chefdk/gem/ruby/2.1.0/bin
 
 if [[ -d $GOPATH ]]; then
-  PATH="$PATH:$GOPATH/bin"
+  PATH="$GOPATH/bin:$PATH"
 fi
 
 export PATH=$(npm bin):$PATH
 
 # Use gnu utils instead of os x
-if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-fi
+# if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
+#   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# fi
 
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
+export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 
-export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date
-"+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date
-"+%Y-%m-%d").log; fi'
+export PATH=$PATH:/usr/local/Cellar/ruby/2.3.1/bin
+
+export PATH=~/.bin/:$PATH
+export PATH=$HOME/node/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+export PATH=$PATH:~/.bin/sonarqube/bin/macosx-universal-64
+export PATH=$PATH:~/.bin/sonar-runner/bin

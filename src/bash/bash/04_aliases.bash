@@ -13,8 +13,8 @@ alias ...='cd ../..'
 alias cbranch="git rev-parse --abbrev-ref HEAD"
 
 git_origin_or_fork() {
-  if git remote 2>/dev/null | grep -iq sirupsen; then
-    echo "sirupsen"
+  if git remote 2>/dev/null | grep -iq skylerl; then
+    echo "skylerl"
   else
     echo "origin"
   fi
@@ -58,7 +58,10 @@ vss() {
 alias ttc='tmux save-buffer -|pbcopy'
 alias tfc='tmux set-buffer "$(pbpaste)"'
 
-alias walrus="ruby -e 'loop { 0.upto(50) { |i| print \"\r\" + (\" \" * i) + \":\" + %w(€ c)[i%2] + \".\" * (50-i); sleep 0.25 } }'"
+# Docker
+alias ds='docker stop $(docker ps -a -q)'
+alias dr='docker rm $(docker ps -a -q)'
+
 
 # Sky
 alias l="ls -la"
@@ -71,4 +74,12 @@ alias   del="rmtrash"
 alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
 
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-alias vim="nvim"
+
+# Postgres
+alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
+alias pgstop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+
+# Chef
+alias chef-up='eval "$(chef shell-init bash)"'
+alias e='/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs -nw'
+alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" &'

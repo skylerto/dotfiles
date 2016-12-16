@@ -1,11 +1,13 @@
 #!/bin/bash
 
-if [[ -r /usr/local/share/chruby/chruby.sh && -z $SHOPIFY_DEV_VAGRANT ]]; then
+if [[ -r /usr/local/share/chruby/chruby.sh ]]; then
   source /usr/local/share/chruby/chruby.sh
   RUBIES=(~/.rubies/*)
-
-  # switch to latest stable
-  chruby 2.2
-
   source /usr/local/share/chruby/auto.sh
 fi
+
+chruby 2.3
+
+export GEM_HOME=$HOME/.gem
+export GEM_PATH=$HOME/.gem
+

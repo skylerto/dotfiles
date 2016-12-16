@@ -1,4 +1,11 @@
 source ~/.bashrc
-source ~/.profile
+# eval "$(chef shell-init bash)"
+#eval "$(chef shell-init bash)"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export CC=gcc-6
+# export LDFLAGS=/usr/local/opt/openssl/lib
+# export CPPFLAGS=/usr/local/opt/openssl/include
+# export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+# export ARM_ARCH="arm64"
+# export CFLAGS="-arch ${ARM_ARCH}"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

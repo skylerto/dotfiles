@@ -11,6 +11,8 @@ set history=1000  " Keep more history, default is 20
 set expandtab
 set laststatus=2
 set ruler
+set wildmenu
+set showcmd
 
 " paste mode for logical insertion, skylerto
 nnoremap <F2> :set invpaste paste?<CR>
@@ -21,12 +23,12 @@ set showmode
 "set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-  Plug 'VundleVim/Vundle.vim'
 
-  Plug 'teoljungberg/vim-grep'
+  Plug 'scrooloose/nerdtree'
 
-  Plug 'scrooloose/syntastic'
+
+  " Plug 'scrooloose/syntastic'
+  " Plug 'SirVer/ultisnips'
 
   " TPOPE FTW
   Plug 'tpope/vim-rails' " Utils for rails
@@ -37,43 +39,61 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
 
   Plug 'kien/ctrlp.vim' " Fuzzy finder
-  Plug 'altercation/vim-colors-solarized' " Colour Scheme
+
 
   Plug 'codescv/vim-matchit' " Brackets
 
   " Languages
-  Plug 'othree/es.next.syntax.vim'
-  Plug 'nickhutchinson/vim-systemtap'
-  Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-markdown'
   Plug 'vim-ruby/vim-ruby'
   Plug 'pangloss/vim-javascript'
+  Plug 'leafgarland/typescript-vim'
 
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
 
-  Plug 'thoughtbot/vim-rspec'
-
   " Snipepts
-  Plug 'honza/vim-snippets'
-  "Plug 'SirVer/ultisnips
-  Plug 'garbas/vim-snipmate'
+  " Plug 'honza/vim-snippets'
+  " Plug 'garbas/vim-snipmate'
 
   Plug 'mattn/emmet-vim'
 
-  Plug 'kristijanhusak/vim-hybrid-material'
-
-  Plug 'leafgarland/typescript-vim'
-  Plug 'Quramy/tsuquyomi'
-  Plug 'Shougo/vimproc.vim'
+  " Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+  " Plug 'Quramy/tsuquyomi'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'mhartington/deoplete-typescript'
 
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-  Plug 'jceb/vim-orgmode'
 
-  Plug 'vitalk/vim-simple-todo'
+  Plug 'airblade/vim-gitgutter'
+
+  Plug 'ervandew/supertab'
+  Plug 'christoomey/vim-tmux-navigator'
+
+  Plug 'tpope/vim-dispatch'
+
+  " Plug 'garbas/vim-snipmate'
+  Plug 'vadv/vim-chef'
+  Plug 'albfan/ag.vim'
+  Plug 'ervandew/supertab'
+
+  "" THEMES
+  Plug 'altercation/vim-colors-solarized' " Colour Scheme
+  Plug 'kristijanhusak/vim-hybrid-material'
+
+  Plug 'junegunn/seoul256.vim'
+  Plug 'mhartington/oceanic-next'
+
+  Plug 'neomake/neomake'
+
+  Plug 'HerringtonDarkholme/yats.vim'
+
 call plug#end()
 
 filetype plugin indent on
+
+
+let g:deoplete#enable_at_startup = 1
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 if !exists("g:ycm_semantic_triggers")
@@ -81,16 +101,6 @@ if !exists("g:ycm_semantic_triggers")
     endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 
-
-" rspec.vim mappings
-let g:rspec_runner = "os_x_iterm2"
-map <leader>t :call runcurrentspecfile()<cr>
-map <leader>s :call runnearestspec()<cr>
-map <leader>l :call runlastspec()<cr>
-"map <leader>a :call runallspecs()<cr>
-map <leader>a :!rake <cr>
-
-" status bar
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
@@ -100,20 +110,20 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 " emmet
 let g:user_emmet_mode='a'    "enable all function in all mode.
-let g:user_emmet_install_global = 0
-" autocmd filetype html,css EmmetInstall
-let g:user_emmet_leader_key='<tab>'
+autocmd filetype html,css EmmetInstall
+let g:user_emmet_leader_key = '<C-x>'
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " trigger configuration. do not use <tab> if you use https://github.com/valloric/youcompleteme.
-"let g:ultisnipsexpandtrigger="<tab>"
-"let g:ultisnipsjumpforwardtrigger="<c-b>"
-"let g:ultisnipsjumpbackwardtrigger="<c-z>"
+let g:ultisnipsexpandtrigger="<tab>"
+let g:ultisnipsjumpforwardtrigger="<c-b>"
+let g:ultisnipsjumpbackwardtrigger="<c-z>"
 
 let g:supertabdefaultcompletiontype    = '<c-n>'
 let g:supertabcrmapping                = 0
-"let g:ultisnipsexpandtrigger           = '<tab>'
-"let g:ultisnipsjumpforwardtrigger      = '<tab>'
-"let g:ultisnipsjumpbackwardtrigger     = '<s-tab>'
+let g:ultisnipsexpandtrigger           = '<tab>'
+let g:ultisnipsjumpforwardtrigger      = '<tab>'
+let g:ultisnipsjumpbackwardtrigger     = '<s-tab>'
 let g:ycm_key_list_select_completion   = ['<c-j>', '<c-n>', '<down>']
 let g:ycm_key_list_previous_completion = ['<c-k>', '<c-p>', '<up>']
 
@@ -124,8 +134,8 @@ let g:ycm_key_list_previous_completion = ['<c-k>', '<c-p>', '<up>']
 "" ctrlp init
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class     " macosx/linux
-set wildignore+=.git/**,public/assets/**,vendor/**,log/**,tmp/**,cellar/**,app/assets/images/**,_site/**,home/.vim/bundle/**,pkg/**,**/.gitkeep,**/.ds_store,**/*.netrw*,node_modules/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " macosx/linux
+set wildignore+=.git/**,public/assets/**,vendor/**,log/**,tmp/**,cellar/**,app/assets/images/**,_site/**,home/.vim/bundle/**,pkg/**,**/.gitkeep,**/.ds_store,**/*.netrw*,node_modules/*,*.class,dist/*
 
 "filetype plugin indent on " enable after vundle loaded
 
@@ -146,7 +156,8 @@ set incsearch     " search as you type
 set smartindent   " Be smart about indentation
 set expandtab     " Tabs are spaces
 set smarttab
-set shell=$SHELL\ -l  " load shell for ruby version etc.
+set shell=bash    " load shell for ruby version etc.
+" set shellcmdflag=-ic
 
 set tabstop=2 " Tabs are 2 spaces
 set backspace=2 " Backspace deletes 2 spaces
@@ -156,7 +167,7 @@ set list " Highlight trailings, stolen from @teoljungberg
 set listchars=tab:>-,trail:.,extends:>,precedes:<
 
 " TODO
-set tags=tags,.git/tags " Use commit hook tags, see ~/.git_template
+set tags=tags,.git/tags" Use commit hook tags, see ~/.git_template
 
 " Buffer Movement
 map <C-J> <C-W>j
@@ -178,18 +189,20 @@ map <leader>gw :Gwrite<CR> " Stage the current file for a commit
 map <leader>gc :Gcommit<CR> " Commit
 map <leader>gp :Gpush<CR> " Push changes
 
-" Save files
-map <leader>s :wa<CR>
+" Save files changing flow to ctrl+s maybe
+noremap <leader>s :wa
 
 " Quit
-map <leader>q :q<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>wq :wq<CR>
 
 " Undo/Redo
 map <leader>z :u<CR> " undo
 map <leader>re :redo<CR> " redo
 
 " Run the current ruby file.
-map <leader>x :!ruby %<cr>
+autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
+nnoremap <leader>x :Dispatch npm run build.dev<CR>
 
 
 " Rename current file, thanks Gary Bernhardt via Ben Orenstein
@@ -229,21 +242,49 @@ endfunction
 "imap <tab>   <c-r>=InsertTabWrapper()<cr>
 imap <s-tab> <c-n>
 
-au BufNewFile,BufRead *.ejson set filetype=json
-au BufNewFile,BufRead *.sxx set filetype=stp
-
 autocmd BufNewFile,BufRead *.md,*.markdown set spell
 
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+" colorscheme hybrid_material
+colorscheme seoul256
 
-set guifont=Hack:h10
+set guifont=Inconsolata:h12
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-let g:syntastic_typescript_checkers = ['tslint']
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist'
+" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
+let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
+
+
 let g:ycm_key_list_select_completion = ['<TAB>']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_ruby_rubocop_exec = '/opt/chefdk/bin/rubocop'
+
+map <leader>t :NERDTreeToggle<CR>
+noremap <leader>; <C-w>R
+
+noremap <leader>sv :source ~/.vimrc<CR>
+autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+" Set lines back to white
+highlight LineNr ctermfg=white
+
+
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+
+" Solution for now
+nnoremap <BS> <C-W>h 
+
+
