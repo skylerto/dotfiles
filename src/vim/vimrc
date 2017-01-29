@@ -23,6 +23,7 @@ set showmode
 "set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+  Plug 'neomake/neomake'
 
   Plug 'scrooloose/nerdtree'
 
@@ -31,7 +32,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'SirVer/ultisnips'
 
   " TPOPE FTW
-  Plug 'tpope/vim-rails' " Utils for rails
+  Plug 'tpope/vim-rails', { 'for': 'ruby' } " Utils for rails
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive' " Git
   Plug 'tpope/vim-unimpaired'
@@ -45,9 +46,9 @@ call plug#begin('~/.vim/plugged')
 
   " Languages
   Plug 'tpope/vim-markdown'
-  Plug 'vim-ruby/vim-ruby'
-  Plug 'pangloss/vim-javascript'
-  Plug 'leafgarland/typescript-vim'
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+  ""  Plug 'leafgarland/typescript-vim'
 
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
@@ -58,10 +59,10 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'mattn/emmet-vim'
 
-  " Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
-  " Plug 'Quramy/tsuquyomi'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'mhartington/deoplete-typescript'
+  Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+  Plug 'Quramy/tsuquyomi'
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'typescript' }
+  " Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
@@ -72,8 +73,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'tpope/vim-dispatch'
 
-  " Plug 'garbas/vim-snipmate'
-  Plug 'vadv/vim-chef'
+  "" Plug 'vadv/vim-chef'
   Plug 'albfan/ag.vim'
   Plug 'ervandew/supertab'
 
@@ -83,10 +83,13 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'junegunn/seoul256.vim'
   Plug 'mhartington/oceanic-next'
+  Plug 'chriskempson/vim-tomorrow-theme'
 
-  Plug 'neomake/neomake'
 
   Plug 'HerringtonDarkholme/yats.vim'
+
+  Plug 'jceb/vim-orgmode'
+  Plug 'tpope/vim-speeddating'
 
 call plug#end()
 
@@ -135,7 +138,9 @@ let g:ycm_key_list_previous_completion = ['<c-k>', '<c-p>', '<up>']
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " macosx/linux
-set wildignore+=.git/**,public/assets/**,vendor/**,log/**,tmp/**,cellar/**,app/assets/images/**,_site/**,home/.vim/bundle/**,pkg/**,**/.gitkeep,**/.ds_store,**/*.netrw*,node_modules/*,*.class,dist/*
+set wildignore+=.git/**,public/assets/**,vendor/**,log/**,tmp/**,cellar/**
+set wildignore+=app/assets/images/**,_site/**,home/.vim/bundle/**,pkg/**
+set wildignore+=**/.gitkeep,**/.ds_store,**/*.netrw*,node_modules/*,*.class,dist/*,*/target/**
 
 "filetype plugin indent on " enable after vundle loaded
 
@@ -167,7 +172,7 @@ set list " Highlight trailings, stolen from @teoljungberg
 set listchars=tab:>-,trail:.,extends:>,precedes:<
 
 " TODO
-set tags=tags,.git/tags" Use commit hook tags, see ~/.git_template
+set tags=tags,.git/tags "Use commit hook tags, see ~/.git_template
 
 " Buffer Movement
 map <C-J> <C-W>j
@@ -202,7 +207,8 @@ map <leader>re :redo<CR> " redo
 
 " Run the current ruby file.
 autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
-nnoremap <leader>x :Dispatch npm run build.dev<CR>
+" nnoremap <leader>x :Dispatch npm run build.dev<CR>
+nnoremap <leader>x !./bin/install.sh<CR>
 
 
 " Rename current file, thanks Gary Bernhardt via Ben Orenstein
@@ -247,14 +253,14 @@ autocmd BufNewFile,BufRead *.md,*.markdown set spell
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
 set background=dark
-" colorscheme solarized
-" colorscheme hybrid_material
-colorscheme seoul256
+colorscheme tomorrow-night
+" set background=light
+" colorscheme Tomorrow
 
-set guifont=Inconsolata:h12
-set guioptions-=T " Removes top toolbar
-set guioptions-=r " Removes right hand scroll bar
-set go-=L " Removes left hand scroll bar
+" set guifont=Inconsolata:h12
+" set guioptions-=T " Removes top toolbar
+" set guioptions-=r " Removes right hand scroll bar
+" set go-=L " Removes left hand scroll bar
 
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist'
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
@@ -263,7 +269,6 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 
 let g:ycm_key_list_select_completion = ['<TAB>']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_ruby_rubocop_exec = '/opt/chefdk/bin/rubocop'
 
 map <leader>t :NERDTreeToggle<CR>
 noremap <leader>; <C-w>R
@@ -288,3 +293,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <BS> <C-W>h 
 
 
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+let NERDTreeShowHidden=1
+
+autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab

@@ -81,5 +81,5 @@ alias pgstop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 
 # Chef
 alias chef-up='eval "$(chef shell-init bash)"'
-alias e='/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs -nw'
+alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
 alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" &'

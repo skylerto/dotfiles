@@ -38,8 +38,11 @@ export PATH=$PATH:/usr/local/Cellar/ruby/2.3.1/bin
 export PATH=~/.bin/:$PATH
 export PATH=$HOME/node/bin:$PATH
 
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+#export NVM_DIR="$HOME/.nvm"
+#. "/usr/local/opt/nvm/nvm.sh"
 
 export PATH=$PATH:~/.bin/sonarqube/bin/macosx-universal-64
 export PATH=$PATH:~/.bin/sonar-runner/bin
+
+
+export PATH=$PATH:~/.bin/vault-cli/bin

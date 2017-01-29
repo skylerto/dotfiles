@@ -9,3 +9,6 @@ export CC=gcc-6
 # export ARM_ARCH="arm64"
 # export CFLAGS="-arch ${ARM_ARCH}"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+
+export PATH=$PATH:~/dev/inlet/aem/crx-quickstart/opt/filevault/vault-cli-3.1.16/bin/
