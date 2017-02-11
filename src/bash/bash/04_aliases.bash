@@ -66,7 +66,6 @@ alias dr='docker rm $(docker ps -a -q)'
 # Sky
 alias l="ls -la"
 alias g="git"
-alias cx="clear;exit;"
 
 # Fix bad habits
 alias trash="rmtrash"
@@ -81,5 +80,8 @@ alias pgstop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 
 # Chef
 alias chef-up='eval "$(chef shell-init bash)"'
-alias e='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
-alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" &'
+
+alias vim='echo "use vi please"'
+alias vi='nvim'
+
+alias cx='chef exec'

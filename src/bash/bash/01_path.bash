@@ -46,3 +46,4 @@ export PATH=$PATH:~/.bin/sonar-runner/bin
 
 
 export PATH=$PATH:~/.bin/vault-cli/bin
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"

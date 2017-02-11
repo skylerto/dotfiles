@@ -39,7 +39,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary' " Comment stuff out with gc in visual mode
   Plug 'tpope/vim-surround'
 
-  Plug 'kien/ctrlp.vim' " Fuzzy finder
+  " Plug 'kien/ctrlp.vim' " Fuzzy finder
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 
 
   Plug 'codescv/vim-matchit' " Brackets
@@ -90,6 +92,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'jceb/vim-orgmode'
   Plug 'tpope/vim-speeddating'
+
+  Plug 'derekwyatt/vim-scala'
 
 call plug#end()
 
@@ -179,7 +183,7 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
-imap jk <esc>
+imap jj <esc>
 map <leader>d :bd<CR>
 
 " Sane behavior on long lines
@@ -253,7 +257,9 @@ autocmd BufNewFile,BufRead *.md,*.markdown set spell
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
 set background=dark
-colorscheme tomorrow-night
+colorscheme solarized
+" set background=dark
+" colorscheme tomorrow-night
 " set background=light
 " colorscheme Tomorrow
 
@@ -290,7 +296,7 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 
 " Solution for now
-nnoremap <BS> <C-W>h 
+nnoremap <BS> <C-W>h
 
 
 autocmd BufRead,BufNewFile *.md setlocal spell
@@ -298,3 +304,29 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 let NERDTreeShowHidden=1
 
 autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
+
+" let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+" if matchstr(local_eslint, "^\/\\w") == ''
+"   let local_eslint = getcwd() . "/" . local_eslint
+" endif
+" if executable(local_eslint)
+"   let g:syntastic_javascript_eslint_exec = local_eslint
+" endif
+
+nnoremap <leader>s :w <CR>
+nnoremap <leader>v :vsp <CR>
+
+autocmd! BufWritePost * Neomake
+" autocmd InsertChange * update | Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
+
+" FZF
+nnoremap <C-p> :FZF<CR>
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+nmap ,d :b#<bar>bd#<CR>
