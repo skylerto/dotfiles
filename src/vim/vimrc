@@ -15,8 +15,8 @@ set wildmenu
 set showcmd
 
 " paste mode for logical insertion, skylerto
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
+nnoremap <C-;> :set invpaste paste?<CR>
+set pastetoggle=<C-;>
 set showmode
 
 " Do the plugins
@@ -94,6 +94,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-speeddating'
 
   Plug 'derekwyatt/vim-scala'
+  Plug 'evanmiller/nginx-vim-syntax'
 
 call plug#end()
 
@@ -330,3 +331,5 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 
 nmap ,d :b#<bar>bd#<CR>
+
+nnoremap <leader>n :tabn <CR>

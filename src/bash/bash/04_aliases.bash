@@ -85,3 +85,5 @@ alias vim='echo "use vi please"'
 alias vi='nvim'
 
 alias cx='chef exec'
+alias today='date +"%m-%d-%y"'
+alias tailf='tail -f'

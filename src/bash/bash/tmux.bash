@@ -25,5 +25,7 @@ ssh() {
     tmux rename-window "$old_name"
 }
 
-export PROMPT_COMMAND=rename_tmux_window_to_current_dir
+# PROMPT_COMMAND='if [[ "$bashrc" != "$PWD" && "$PWD" != "$HOME" && -e .bashrc ]]; then bashrc="$PWD"; . .bashrc; fi'
+PROMPT_COMMAND='if [[ "$profile" != "$PWD" && "$PWD" != "$HOME" && -e .profile ]]; then profile="$PWD"; . .profile; fi'
+
 
