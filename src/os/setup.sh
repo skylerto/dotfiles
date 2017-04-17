@@ -12,6 +12,10 @@ declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSIT
 declare dotfilesDirectory="$HOME/projects/dotfiles"
 declare skipQuestions=false
 
+install_arch_prereqs() {
+  pacman -S wget
+}
+
 
 download() {
 
@@ -212,6 +216,8 @@ verify_os() {
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    elif [ "$os_name" == "Linux" ] && [ -f "/etc/arch-release" ]; then
+      install_arch_prereqs
     else
         printf "Sorry, this script is intended only for OS X and Ubuntu!"
     fi
