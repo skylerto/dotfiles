@@ -333,3 +333,5 @@ let g:fzf_action = {
 nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
+nnoremap <leader>x :!bundle exec rspec spec/
+set clipboard=unnamed
