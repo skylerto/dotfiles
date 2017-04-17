@@ -59,12 +59,13 @@ alias ttc='tmux save-buffer -|pbcopy'
 alias tfc='tmux set-buffer "$(pbpaste)"'
 
 # Docker
-alias ds='docker stop $(docker ps -a -q)'
-alias dr='docker rm $(docker ps -a -q)'
+alias docks='docker stop $(docker ps -a -q)'
+alias dockr='docker rm $(docker ps -a -q)'
 
 
 # Sky
 alias l="ls -la"
+alias ll="ls -la"
 alias g="git"
 
 # Fix bad habits
@@ -85,5 +86,9 @@ alias vim='echo "use vi please"'
 alias vi='nvim'
 
 alias cx='chef exec'
-alias today='date +"%m-%d-%y"'
+alias today='date +"%d-%m-%y"'
 alias tailf='tail -f'
+
+alias delr='delivery review'
+
+alias eclipse='/Applications/Eclipse.app/Contents/MacOS/eclipse>/dev/null&'

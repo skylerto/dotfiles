@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source ~/.bash/.git-prompt.sh
 # Start from scratch
 PS1=''
 

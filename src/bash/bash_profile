@@ -1,6 +1,4 @@
 source ~/.bashrc
-# eval "$(chef shell-init bash)"
-#eval "$(chef shell-init bash)"
 
 export CC=gcc-6
 # export LDFLAGS=/usr/local/opt/openssl/lib
@@ -8,7 +6,3 @@ export CC=gcc-6
 # export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 # export ARM_ARCH="arm64"
 # export CFLAGS="-arch ${ARM_ARCH}"
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-
-export PATH=$PATH:~/dev/inlet/aem/crx-quickstart/opt/filevault/vault-cli-3.1.16/bin/
