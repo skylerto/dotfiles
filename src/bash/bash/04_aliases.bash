@@ -82,7 +82,7 @@ alias pgstop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
 # Chef
 alias chef-up='eval "$(chef shell-init bash)"'
 
-alias vim='echo "use vi please"'
+# alias vim='echo "use vi please"'
 alias vi='nvim'
 
 alias cx='chef exec'
@@ -92,3 +92,5 @@ alias tailf='tail -f'
 alias delr='delivery review'
 
 alias eclipse='/Applications/Eclipse.app/Contents/MacOS/eclipse>/dev/null&'
+alias sp='spotify'
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"

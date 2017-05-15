@@ -4,7 +4,8 @@ set relativenumber
 set mouse=a
 set cursorline
 set nocompatible " No vi compatility, this first because it resets some options
-let mapleader="\<Space>" " Mapleader, skylerto
+" let mapleader="\<Space>" " Mapleader, skylerto
+let mapleader="," " Mapleader, skylerto
 filetype off
 set encoding=utf-8
 set history=1000  " Keep more history, default is 20
@@ -23,9 +24,14 @@ set showmode
 "set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+  Plug 'flazz/vim-colorschemes'
+
   Plug 'neomake/neomake'
+  Plug 'kassio/neoterm'
+  Plug 'janko-m/vim-test'
 
   Plug 'scrooloose/nerdtree'
+  Plug 'chrisbra/csv.vim'
 
 
   " Plug 'scrooloose/syntastic'
@@ -38,6 +44,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-commentary' " Comment stuff out with gc in visual mode
   Plug 'tpope/vim-surround'
+  " Plug 'tpope/vim-vinegar'
+  " Plug 'thoughtbot/vim-rspec'
 
   " Plug 'kien/ctrlp.vim' " Fuzzy finder
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -48,7 +56,7 @@ call plug#begin('~/.vim/plugged')
 
   " Languages
   Plug 'tpope/vim-markdown'
-  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   ""  Plug 'leafgarland/typescript-vim'
 
@@ -61,8 +69,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'mattn/emmet-vim'
 
-  Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
-  Plug 'Quramy/tsuquyomi'
+  " Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
+  " Plug 'Quramy/tsuquyomi'
   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'typescript' }
   " Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 
@@ -83,7 +91,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized' " Colour Scheme
   Plug 'kristijanhusak/vim-hybrid-material'
 
-  Plug 'junegunn/seoul256.vim'
+  " Plug 'junegunn/seoul256.vim'
   Plug 'mhartington/oceanic-next'
   Plug 'chriskempson/vim-tomorrow-theme'
 
@@ -95,10 +103,11 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'derekwyatt/vim-scala'
   Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
-filetype plugin indent on
+" filetype plugin indent on
 
 
 let g:deoplete#enable_at_startup = 1
@@ -156,10 +165,10 @@ set noswapfile " because no need
 set nobackup
 
 syntax enable
-set t_co=256  " 2000s plz
-set textwidth=80  " switch line at 80 characters
+set t_co=16 " 2000s plz
+set textwidth=120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
-set showmatch     " show matching of: () [] {}
+" set showmatch     " show matching of: () [] {}
 set ignorecase    " required for smartcase to work
 set smartcase     " case sensitive when uppercase is present
 set incsearch     " search as you type
@@ -211,7 +220,7 @@ map <leader>z :u<CR> " undo
 map <leader>re :redo<CR> " redo
 
 " Run the current ruby file.
-autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
+" autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
 " nnoremap <leader>x :Dispatch npm run build.dev<CR>
 nnoremap <leader>x !./bin/install.sh<CR>
 
@@ -237,6 +246,12 @@ function! EditFile()
 endfunction
 map <leader>e :call EditFile()<cr>
 
+function! TestFile()
+  let file = expand('%')
+  exec ':T bundle exec rspec ' . file
+endfunction
+noremap <leader>tf :call TestFile()<cr>
+
 " Add a little love with leader l
 map <leader>l :exe ":normal i" . "♥"<CR>
 
@@ -258,7 +273,9 @@ autocmd BufNewFile,BufRead *.md,*.markdown set spell
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
 set background=dark
-colorscheme solarized
+" set background=light
+ colorscheme solarized
+" colorscheme codeschool
 " set background=dark
 " colorscheme tomorrow-night
 " set background=light
@@ -277,11 +294,10 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 let g:ycm_key_list_select_completion = ['<TAB>']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
-map <leader>t :NERDTreeToggle<CR>
+noremap - :NERDTreeToggle<CR>
 noremap <leader>; <C-w>R
 
 noremap <leader>sv :source ~/.vimrc<CR>
-autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 
 command! WQ wq
 command! Wq wq
@@ -289,7 +305,7 @@ command! W w
 command! Q q
 
 " Set lines back to white
-highlight LineNr ctermfg=white
+" highlight LineNr ctermfg=white
 
 
 nnoremap <C-J> <C-W>j
@@ -317,9 +333,13 @@ autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
 nnoremap <leader>s :w <CR>
 nnoremap <leader>v :vsp <CR>
 
-autocmd! BufWritePost * Neomake
-" autocmd InsertChange * update | Neomake
+au BufRead,BufNewFile * Neomake!
+autocmd! BufWritePost * Neomake!
+autocmd InsertChange * update | Neomake!
 let g:neomake_javascript_enabled_makers = ['eslint']
+
+autocmd Filetype ruby setlocal makeprg=rubocop
+let g:neomake_ruby_enabled_makers = ['rubocop']
 " let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
 " FZF
@@ -333,5 +353,25 @@ let g:fzf_action = {
 nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
-nnoremap <leader>x :!bundle exec rspec spec/
+nnoremap <leader>x :T bundle exec rspec spec<CR>
 set clipboard=unnamed
+
+au BufRead,BufNewFile *.rb setfiletype ruby
+au BufRead,BufNewFile *.gemspec setfiletype ruby
+au BufRead,BufNewFile Rakefile setfiletype ruby
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> ,th :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+tnoremap <Esc> <C-\><C-n>
+
+" I hate myself
+imap jk <Esc>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>

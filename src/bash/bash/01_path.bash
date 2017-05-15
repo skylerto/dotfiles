@@ -43,6 +43,8 @@ export PATH=$HOME/node/bin:$PATH
 
 export PATH=$PATH:~/.bin/sonarqube/bin/macosx-universal-64
 export PATH=$PATH:~/.bin/sonar-runner/bin
+export PATH=$PATH:~/.bin/parse_jwt
+export PATH=$PATH:~/.bin/jasypt/bin
 
 
 export PATH=$PATH:~/.bin/vault-cli/bin

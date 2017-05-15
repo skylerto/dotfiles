@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Normal Colors
+Normal Colors
 RED=$'\e[0;31m'
 GREEN=$'\e[0;32m'
 YELLOW=$'\e[0;33m'
@@ -17,7 +17,7 @@ ORANGE=$'\e[91m'
 # Revert color back to the normal color
 NORMAL=$'\e[00m'
 
-# LIGHT COLORS
+# # LIGHT COLORS
 LIGHT_BLUE=$'\e[1;34m'
 LIGHT_GREEN=$'\e[1;32m'
 LIGHT_CYAN=$'\e[1;36m'
