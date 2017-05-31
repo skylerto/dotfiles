@@ -1,8 +1,18 @@
 source ~/.bashrc
 
-export CC=gcc-6
+export CC=gcc
 # export LDFLAGS=/usr/local/opt/openssl/lib
 # export CPPFLAGS=/usr/local/opt/openssl/include
 # export PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
 # export ARM_ARCH="arm64"
 # export CFLAGS="-arch ${ARM_ARCH}"
+
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+  exec startx
+  # source ~/.xinitrc
+fi
+
+NPM_PACKAGES="${HOME}/.node_packages"
+
+PATH="$NPM_PACKAGES/bin:$PATH"
+

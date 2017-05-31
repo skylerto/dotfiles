@@ -4,8 +4,10 @@ for file in ~/.bash/*.bash; do
   source $file
 done
 
-unset DISPLAY
+# unset DISPLAY
 
 # eval "$(fasd --init auto)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source /usr/share/chruby/chruby.sh

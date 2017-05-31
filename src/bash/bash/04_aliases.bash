@@ -68,11 +68,6 @@ alias l="ls -la"
 alias ll="ls -la"
 alias g="git"
 
-# Fix bad habits
-alias trash="rmtrash"
-alias   del="rmtrash"
-alias rm="echo Use 'del', or the full path i.e. '/bin/rm'"
-
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Postgres
@@ -93,4 +88,4 @@ alias delr='delivery review'
 
 alias eclipse='/Applications/Eclipse.app/Contents/MacOS/eclipse>/dev/null&'
 alias sp='spotify'
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+# alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"

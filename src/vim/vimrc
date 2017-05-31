@@ -165,7 +165,7 @@ set noswapfile " because no need
 set nobackup
 
 syntax enable
-set t_co=16 " 2000s plz
+set t_co=256 " 2000s plz
 set textwidth=120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
 " set showmatch     " show matching of: () [] {}
@@ -274,7 +274,7 @@ autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
 set background=dark
 " set background=light
- colorscheme solarized
+ " colorscheme solarized
 " colorscheme codeschool
 " set background=dark
 " colorscheme tomorrow-night
