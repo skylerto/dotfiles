@@ -15,6 +15,9 @@ declare -a FILES_TO_SYMLINK=(
 
   # VIM
   "vim/vimrc"
+
+  # Config
+  "config/config"
 )
 
 
