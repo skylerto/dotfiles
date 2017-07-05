@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source /usr/share/chruby/chruby.sh
 for file in ~/.bash/*.bash; do
   source $file
 done
@@ -10,4 +11,3 @@ done
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-source /usr/share/chruby/chruby.sh

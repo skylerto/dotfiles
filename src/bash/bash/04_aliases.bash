@@ -81,7 +81,7 @@ alias chef-up='eval "$(chef shell-init bash)"'
 alias vi='nvim'
 
 alias cx='chef exec'
-alias today='date +"%d-%m-%y"'
+alias today='date +"%Y-%m-%d"'
 alias tailf='tail -f'
 
 alias delr='delivery review'

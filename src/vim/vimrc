@@ -31,7 +31,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'janko-m/vim-test'
 
   Plug 'scrooloose/nerdtree'
-  Plug 'chrisbra/csv.vim'
+  " Plug 'chrisbra/csv.vim'
 
 
   " Plug 'scrooloose/syntastic'
@@ -104,6 +104,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'derekwyatt/vim-scala'
   Plug 'evanmiller/nginx-vim-syntax'
   Plug 'hashivim/vim-terraform'
+
+  " Plug 'ajmwager/vim-dues'
 
 call plug#end()
 
@@ -277,7 +279,7 @@ set background=dark
  " colorscheme solarized
 " colorscheme codeschool
 " set background=dark
-" colorscheme tomorrow-night
+colorscheme Tomorrow-Night
 " set background=light
 " colorscheme Tomorrow
 

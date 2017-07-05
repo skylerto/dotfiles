@@ -48,5 +48,7 @@ export PATH=$PATH:~/.bin/jasypt/bin
 
 
 export PATH=$PATH:~/.bin/vault-cli/bin
+export PATH=$PATH:~/bin/Postman
+export PATH=$PATH:~/bin
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home)
