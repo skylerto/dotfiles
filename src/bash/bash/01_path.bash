@@ -16,9 +16,9 @@ if [[ -d $HOME/.bin ]]; then
   export PATH=$HOME/.bin:$PATH
 fi
 
-export GOPATH=~/work
 export PATH=$PATH:/Users/skylerl/.chefdk/gem/ruby/2.1.0/bin
 
+export GOPATH=~/dev/go
 if [[ -d $GOPATH ]]; then
   PATH="$GOPATH/bin:$PATH"
 fi
@@ -50,5 +50,12 @@ export PATH=$PATH:~/.bin/jasypt/bin
 export PATH=$PATH:~/.bin/vault-cli/bin
 export PATH=$PATH:~/bin/Postman
 export PATH=$PATH:~/bin
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
-export JAVA_HOME=$(/usr/libexec/java_home)
+
+
+if hash brew 2> /dev/null; then
+  export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+fi
+
+if [ -d /usr/libexec ]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
