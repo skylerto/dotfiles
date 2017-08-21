@@ -89,3 +89,7 @@ alias delr='delivery review'
 alias eclipse='/Applications/Eclipse.app/Contents/MacOS/eclipse>/dev/null&'
 alias sp='spotify'
 # alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+alias sv='eval "$(ssh-agent -s)" && ssh-add'
+
+# alias indellient_share=`sudo mount -t cifs -o username=skylerl //OSCAR/Store/ /home/skylerl/indellient`

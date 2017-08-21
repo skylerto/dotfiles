@@ -14,6 +14,11 @@ set laststatus=2
 set ruler
 set wildmenu
 set showcmd
+" System Clipboard
+"" Arch
+set clipboard+=unnamedplus
+"" macOS
+set clipboard+=unnamed
 
 " paste mode for logical insertion, skylerto
 nnoremap <C-;> :set invpaste paste?<CR>
@@ -105,6 +110,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'evanmiller/nginx-vim-syntax'
   Plug 'hashivim/vim-terraform'
 
+  Plug 'cakebaker/scss-syntax.vim'
   " Plug 'ajmwager/vim-dues'
 
 call plug#end()
@@ -356,7 +362,6 @@ nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
 nnoremap <leader>x :T bundle exec rspec spec<CR>
-set clipboard=unnamed
 
 au BufRead,BufNewFile *.rb setfiletype ruby
 au BufRead,BufNewFile *.gemspec setfiletype ruby
