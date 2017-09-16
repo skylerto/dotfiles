@@ -13,10 +13,10 @@
 exec xrandr --output eDP-1 --mode 2880x1800
 # exec --no-startup-id nm-applet
 # exec --no-startup-id polybar top
-exec albert &
+exec --no-startup-id albert &
 # exec --no-startup-id feh --bg-fill ~/Pictures/firewatch\ original\ art.jpg
 
-exec dunst
+# exec --no-startup-id dunst
 
 # Wallpapers
 exec --no-startup-id feh --bg-fill ~/Pictures/elephant_lock.png
@@ -24,11 +24,15 @@ bindsym $mod+Shift+semicolon exec i3lock -i ~/Pictures/elephant_lock.png
 
 exec --no-startup-id compton
 exec /usr/bin/compton --config ~/.config/compton/config
+# exec --no-startup-id polybar example
+exec polybar example
+#
+# new_window 1pixel
 
 
 # Start UP Apps
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/termite'
-exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/slack'
+# exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/termite'
+# exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/slack'
 
 set $mod Mod4
 
@@ -38,11 +42,18 @@ set $mod Mod4
 #font Droid:monospace 10
 font xft:Droid Sans Mono 10
 
-client.focused #859900 #859900 #fdf6e3 #859900
+#new_window none
+#bindsym $mod+/ [class=".*"] border pixel 3
+#bindsym $mod+Shift+/ --release [class=".*"] border none
+
+
+# client.focused #859900 #859900 #fdf6e3 #859900
+client.focused #002b36 #002b36 #fdf6e3 #002b36
+
 
 # Media Keys
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%; exec pactl set-sink-mute @DEFAULT_SINK@ 0
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # Media Player Keys
@@ -54,8 +65,9 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-
+# Take Screenshots
 bindsym --release $mod+p exec scrot -s ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym --release $mod+Shift+p exec scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png -e 'gimp ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png'
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -71,9 +83,10 @@ bindsym --release $mod+p exec scrot -s ~/Pictures/Screenshots/%Y-%m-%d-%T-screen
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-new_window none
-
 bindsym $mod+space exec dmenu_run
+
+# Monitor
+bindsym $mod+Shift+m exec --no-startup-id /home/skylerl/bin/monitor
 
 # gaps outer 5
 gaps inner 12
@@ -197,10 +210,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -220,22 +233,22 @@ bindsym $mod+r mode "resize"
 # bar {
 #         status_command i3status
 # }
-bar {
-  colors {
-    # Whole color settings
-    background #000000
-    statusline #ffffff
-    separator  #666666
+# bar {
+#   colors {
+#     # Whole color settings
+#     background #000000
+#     statusline #ffffff
+#     separator  #666666
 
-    # Type             border  background font
-    focused_workspace  #008fff #007fff #ffffff
-    active_workspace   #333333 #5f676a #ffffff
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace   #aa0000 #990000 #ffffff
-  }
-  # height 25
-  # i3bar position
-  position top
-  # Using custom i3status.conf
-  status_command i3status
-}
+#     # Type             border  background font
+#     focused_workspace  #008fff #007fff #ffffff
+#     active_workspace   #333333 #5f676a #ffffff
+#     inactive_workspace #333333 #222222 #888888
+#     urgent_workspace   #aa0000 #990000 #ffffff
+#   }
+#   # height 25
+#   # i3bar position
+#   position top
+#   # Using custom i3status.conf
+#   status_command i3status
+# }
