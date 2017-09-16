@@ -25,3 +25,4 @@ LIGHT_RED=$'\e[1;31m'
 LIGHT_PURPLE=$'\e[1;35m'
 LIGHT_YELLOW=$'\e[1;33m'
 LIGHT_GRAY=$'\e[0;37m'
+

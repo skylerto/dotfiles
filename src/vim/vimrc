@@ -280,14 +280,15 @@ autocmd BufNewFile,BufRead *.md,*.markdown set spell
 
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
+let g:solarized_termcolors = 16
+
+" Fix for WTF colors
+let g:solarized_termtrans = 1
+let g:solarized_visibility = "high"
+let g:solarized_contrast = "high"
 set background=dark
-" set background=light
- " colorscheme solarized
-" colorscheme codeschool
-" set background=dark
-colorscheme Tomorrow-Night
-" set background=light
-" colorscheme Tomorrow
+ colorscheme solarized
+" colorscheme Tomorrow-Night
 
 " set guifont=Inconsolata:h12
 " set guioptions-=T " Removes top toolbar
