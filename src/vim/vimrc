@@ -29,6 +29,7 @@ set showmode
 "set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+
   Plug 'flazz/vim-colorschemes'
 
   Plug 'neomake/neomake'
@@ -174,7 +175,8 @@ set nobackup
 
 syntax enable
 set t_co=256 " 2000s plz
-set textwidth=120  " switch line at 80 characters
+set textwidth=80
+"120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
 " set showmatch     " show matching of: () [] {}
 set ignorecase    " required for smartcase to work
