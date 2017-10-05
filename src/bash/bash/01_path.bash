@@ -59,3 +59,9 @@ fi
 if [ -d /usr/libexec ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)
 fi
+
+
+if [ -d /usr/lib/jvm/java-8-openjdk ]; then
+  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk/jre"
+  export PATH="${PATH}:${JAVA_HOME}/bin"
+fi
