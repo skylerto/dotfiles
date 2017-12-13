@@ -1,6 +1,6 @@
 [options]
 # font = Monospace 9
-font = Inconsolata 20px
+font = Inconsolata 24px
 # font = Droid Sans Mono 8
 # [colors]
 # background = rgba(63, 63, 63, 0.8)
