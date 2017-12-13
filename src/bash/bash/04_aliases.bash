@@ -94,3 +94,4 @@ alias sv='eval "$(ssh-agent -s)" && ssh-add'
 # alias indellient_share=`sudo mount -t cifs -o username=skylerl //FS1/store/ /home/skylerl/indellient`
 
 alias nav='cd ~/dev/inlet/navigator/'
+alias c='clear'

@@ -232,9 +232,9 @@ map <leader>z :u<CR> " undo
 map <leader>re :redo<CR> " redo
 
 " Run the current ruby file.
-" autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
+autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
 " nnoremap <leader>x :Dispatch npm run build.dev<CR>
-nnoremap <leader>x !./bin/install.sh<CR>
+" nnoremap <leader>x !./bin/install.sh<CR>
 
 
 " Rename current file, thanks Gary Bernhardt via Ben Orenstein
@@ -367,7 +367,7 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
-nnoremap <leader>x :T bundle exec rspec spec<CR>
+" nnoremap <leader>x :T bundle exec rspec spec<CR>
 
 au BufRead,BufNewFile *.rb setfiletype ruby
 au BufRead,BufNewFile *.gemspec setfiletype ruby
