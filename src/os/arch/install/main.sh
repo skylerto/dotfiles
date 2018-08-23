@@ -29,7 +29,7 @@ main() {
   # Install yaourt Software
   yaourt_install
 
-  declare -a packages=("albert" "neovim")
+  declare -a packages=("albert" "neovim" "python2" "python")
 
   ## now loop through the above array
   for pkg in "${packages[@]}"
