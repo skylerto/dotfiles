@@ -13,7 +13,7 @@ declare dotfilesDirectory="$HOME/projects/dotfiles"
 declare skipQuestions=false
 
 install_arch_prereqs() {
-  pacman -S wget
+  pacman -Syy wget --noconfirm
 }
 
 
