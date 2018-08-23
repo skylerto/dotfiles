@@ -9,9 +9,15 @@
 #
 # - - - - -
 pacman_install() {
-  sudo pacman -Syy $1 --noconfirm
+  local pkg="$1"
+  print_info "Installing ${pkg}"
+  sudo pacman -Sy $pkg --noconfirm
+  print_success "Installed ${pkg}"
 }
 
 yaourt_install() {
-  sudo yaourt -S $1 --noconfirm
+  local pkg="$1"
+  print_info "Installing ${pkg}"
+  sudo yaourt -S $pkg --noconfirm
+  print_success "Installed ${pkg}"
 }
