@@ -12,6 +12,8 @@ declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSIT
 declare dotfilesDirectory="$HOME/projects/dotfiles"
 declare skipQuestions=false
 
+OS=""
+
 install_arch_prereqs() {
   echo "prereqs"
 }
@@ -190,7 +192,7 @@ verify_os() {
     os_name="$(uname -s)"
 
     if [ "$os_name" == "Darwin" ]; then
-
+        OS="osx"
         os_version="$(sw_vers -productVersion)"
 
         if is_supported_version "$os_version" "$MINIMUM_OS_X_VERSION"; then
@@ -201,6 +203,7 @@ verify_os() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     elif [ "$os_name" == "Linux" ] && [ -f "/etc/arch-release" ]; then
+      OS="arch"
       echo "install_arch_prereqs"
       return 0
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -210,6 +213,7 @@ verify_os() {
 
     elif [ "$os_name" == "Linux" ] && [ -e "/etc/lsb-release" ]; then
 
+        OS="ubuntu"
         os_version="$(lsb_release -d | cut -f2 | cut -d' ' -f2)"
 
         if is_supported_version "$os_version" "$MINIMUM_UBUNTU_VERSION"; then
@@ -252,7 +256,7 @@ main() {
   fi
 
   ./create_symlinks.sh
-  ./install_applications.sh
+  ./install_applications.sh ${OS}
   ./setup_vim.sh
 
   print_in_green "Don't forget to source ~/.bashrc !\n"

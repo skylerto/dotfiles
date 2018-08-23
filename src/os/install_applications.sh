@@ -1,9 +1,8 @@
 #!/bin/bash
 
 main() {
-
-  ./osx/install/main.sh
-
+  local os="$1"
+  ./${os}/install/main.sh
 }
 
-main
+main $1
