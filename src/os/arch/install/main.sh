@@ -2,7 +2,8 @@
 
 
 cd "$(dirname "${BASH_SOURCE[0]}")" \
-    && source "../../utils.sh"
+    && source "../../utils.sh" \
+    && source "./utils.sh"
 
 main() {
 
