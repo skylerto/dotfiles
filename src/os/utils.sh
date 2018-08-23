@@ -77,6 +77,10 @@ print_result() {
   return "$1"
 }
 
+print_error_stream() {
+  print_error "$1"
+}
+
 # Color printers.
 print_in_green() {
   printf "\e[0;32m%b\e[0m" "$1"
