@@ -22,7 +22,7 @@ main() {
   ## now loop through the above array
   for pkg in "${packages[@]}"
   do
-     pacman_install $i
+     pacman_install $pkg
   done
 
   # - - - - - - - - - -
@@ -34,7 +34,7 @@ main() {
   ## now loop through the above array
   for pkg in "${packages[@]}"
   do
-     yaourt_install $i
+     yaourt_install $pkg
   done
 
 
