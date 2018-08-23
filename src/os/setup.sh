@@ -201,7 +201,7 @@ verify_os() {
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     elif [ "$os_name" == "Linux" ] && [ -f "/etc/arch-release" ]; then
-      install_arch_prereqs
+      echo "install_arch_prereqs"
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Check if the OS is `Ubuntu` and
