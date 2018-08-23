@@ -33,8 +33,8 @@ bindsym $mod+Shift+semicolon exec i3lock -i ~/Pictures/ubuntu-fog.png
 # exec --no-startup-id compton
 exec /usr/bin/compton --config ~/.config/compton/config
 # exec --no-startup-id polybar example
-# exec polybar example
-exec /home/skylerl/bin/launch_polybar
+# exec /home/skylerl/bin/launch_polybar
+exec polybar example &
 #
 # new_window 1pixel
 
