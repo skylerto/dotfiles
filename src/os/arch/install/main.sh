@@ -16,7 +16,6 @@ main() {
 
   # - - - - - - - - - -
   # install pacman software
-  pacman_install
 
   declare -a packages=("git")
 
