@@ -198,7 +198,10 @@ verify_os() {
         else
             printf "Sorry, this script is intended only for OS X %s+" "$MINIMUM_OS_X_VERSION"
         fi
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    elif [ "$os_name" == "Linux" ] && [ -f "/etc/arch-release" ]; then
+      install_arch_prereqs
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # Check if the OS is `Ubuntu` and
@@ -214,10 +217,7 @@ verify_os() {
             printf "Sorry, this script is intended only for Ubuntu %s+" "$MINIMUM_UBUNTU_VERSION"
         fi
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    elif [ "$os_name" == "Linux" ] && [ -f "/etc/arch-release" ]; then
-      install_arch_prereqs
     else
         printf "Sorry, this script is intended only for OS X and Ubuntu!"
     fi
