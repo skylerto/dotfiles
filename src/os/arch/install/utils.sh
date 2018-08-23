@@ -13,5 +13,5 @@ pacman_install() {
 }
 
 yaourt_install() {
-  sudo yaourt $1 --noconfirm
+  sudo yaourt -S $1 --noconfirm
 }
