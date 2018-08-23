@@ -12,6 +12,6 @@ pacman_install() {
   sudo pacman -Syy $1 --noconfirm
 }
 
-pacman_install() {
+yaourt_install() {
   sudo yaourt $1 --noconfirm
 }
