@@ -58,6 +58,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  Plug 'PProvost/vim-ps1'
+
 
   Plug 'codescv/vim-matchit' " Brackets
 
@@ -81,7 +83,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'typescript' }
   " Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --go-completer' }
 
   Plug 'airblade/vim-gitgutter'
 
@@ -96,7 +98,6 @@ call plug#begin('~/.vim/plugged')
 
   "" THEMES
   Plug 'altercation/vim-colors-solarized' " Colour Scheme
-  Plug 'kristijanhusak/vim-hybrid-material'
 
   " Plug 'junegunn/seoul256.vim'
   Plug 'mhartington/oceanic-next'
@@ -107,14 +108,17 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'jceb/vim-orgmode'
   Plug 'tpope/vim-speeddating'
+  Plug 'fatih/vim-go', { 'for': 'go' }
 
   Plug 'derekwyatt/vim-scala'
-  Plug 'evanmiller/nginx-vim-syntax'
+  " Plug 'evanmiller/nginx-vim-syntax'
   Plug 'hashivim/vim-terraform'
 
   Plug 'cakebaker/scss-syntax.vim'
   " Plug 'ajmwager/vim-dues'
   " Plug 'dansomething/vim-eclim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 " filetype plugin indent on
@@ -176,7 +180,7 @@ set nobackup
 
 syntax enable
 set t_co=256 " 2000s plz
-set textwidth=80
+" set textwidth=80
 "120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
 " set showmatch     " show matching of: () [] {}
@@ -204,8 +208,9 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
-imap jj <esc>
 map <leader>d :bd<CR>
+nnoremap <C-n> :bprevious<CR>
+nnoremap <C-m> :bnext<CR>
 
 " Sane behavior on long lines
 nmap k gk
@@ -291,7 +296,9 @@ let g:solarized_termtrans = 1
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 set background=dark
- colorscheme solarized
+" set background=light
+colorscheme solarized
+" colorscheme material
 " colorscheme Tomorrow-Night
 
 " set guifont=Inconsolata:h12
@@ -364,6 +371,10 @@ let g:fzf_action = {
   \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
+map <C-b> :Buffers<CR>
+map <C-t> :Tags<CR>
+
+
 nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
@@ -372,6 +383,8 @@ nnoremap <leader>n :tabn <CR>
 au BufRead,BufNewFile *.rb setfiletype ruby
 au BufRead,BufNewFile *.gemspec setfiletype ruby
 au BufRead,BufNewFile Rakefile setfiletype ruby
+au BufRead,BufNewFile Vagrantfile setfiletype ruby
+au BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 " Useful maps
 " hide/close terminal
@@ -384,14 +397,23 @@ tnoremap <Esc> <C-\><C-n>
 
 " I hate myself
 imap jk <Esc>
+imap jj <esc>
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-
-
 map <leader>t :exe ":normal i" . strftime('%c')<CR>
 
 nnoremap <leader>t :r! date<CR>
 " inoremap <F5> <C-R>=strftime("%c")<CR>
+"
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
