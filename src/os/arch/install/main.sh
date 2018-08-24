@@ -17,7 +17,7 @@ main() {
   # - - - - - - - - - -
   # install pacman software
 
-  declare -a packages=("git")
+  declare -a packages=("git" "the_silver_searcher")
 
   ## now loop through the above array
   for pkg in "${packages[@]}"
