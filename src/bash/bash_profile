@@ -42,4 +42,4 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.cargo/env
 
-VBoxClient --clipboard || echo "VBoxClient clipboard"
+VBoxClient-all || echo "VBoxClient clipboard"
