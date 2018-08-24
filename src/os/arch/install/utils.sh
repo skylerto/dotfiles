@@ -18,6 +18,6 @@ pacman_install() {
 yaourt_install() {
   local pkg="$1"
   print_info "Installing ${pkg}"
-  sudo yaourt -S $pkg --noconfirm
+  yaourt -S $pkg --noconfirm
   print_success "Installed ${pkg}"
 }
