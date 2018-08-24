@@ -26,7 +26,7 @@ main() {
     local i=""
     local sourceFile=""
     local targetFile=""
-    local skipQuestions=false
+    local skipQuestions=$1
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
