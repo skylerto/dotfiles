@@ -255,7 +255,7 @@ main() {
 
   fi
 
-  ./create_symlinks.sh
+  ./create_symlinks.sh true
   ./install_applications.sh ${OS}
   ./setup_vim.sh
 
