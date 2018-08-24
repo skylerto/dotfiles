@@ -22,19 +22,19 @@ main() {
   ## now loop through the above array
   for pkg in "${packages[@]}"
   do
-     pacman_install $pkg
+     pacman_install "${pkg}"
   done
 
   # - - - - - - - - - -
   # Install yaourt Software
   yaourt_install
 
-  declare -a packages=("albert" "compton" "polybar" "neovim" "python2" "python" "python2-pip" "python-pip" "ttf-google-fonts-git" "neofetch")
+  declare -a packages=("albert" "compton" "polybar" "neovim" "python2" "python" "python2-pip" "python-pip" "ttf-google-fonts-git" "neofetch" "fzf")
 
   ## now loop through the above array
   for pkg in "${packages[@]}"
   do
-     yaourt_install $pkg
+     yaourt_install "${pkg}"
   done
 
 
