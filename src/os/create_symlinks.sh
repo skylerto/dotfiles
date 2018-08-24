@@ -70,6 +70,13 @@ main() {
                     print_error "$targetFile → $sourceFile"
                 fi
 
+            else
+
+              rm -rf "$targetFile"
+
+              execute \
+                  "ln -fs $sourceFile $targetFile" \
+                  "$targetFile → $sourceFile"
             fi
 
         fi
