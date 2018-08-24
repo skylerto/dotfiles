@@ -297,7 +297,11 @@ let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 set background=dark
 " set background=light
-colorscheme solarized
+
+if filereadable(expand('~/.vim/plugged/vim-colors-solarized/colors/solarized.vim'))
+  colorscheme solarized
+endif
+" colorscheme solarized
 " colorscheme material
 " colorscheme Tomorrow-Night
 
