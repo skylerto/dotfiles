@@ -37,7 +37,6 @@ main() {
      yaourt_install "${pkg}"
   done
 
-
 }
 
 main
