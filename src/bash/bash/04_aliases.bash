@@ -1,10 +1,5 @@
 #! /bin/bash
 
-# https://github.com/github/hub
-if command -v hub > /dev/null; then
-  alias git=hub
-fi
-
 alias ls='ls -G'
 
 alias ..='cd ..'
@@ -13,8 +8,8 @@ alias ...='cd ../..'
 alias cbranch="git rev-parse --abbrev-ref HEAD"
 
 git_origin_or_fork() {
-  if git remote 2>/dev/null | grep -iq skylerl; then
-    echo "skylerl"
+  if git remote 2>/dev/null | grep -iq skylerto; then
+    echo "skylerto"
   else
     echo "origin"
   fi
@@ -27,6 +22,9 @@ git-find-merge() {
     | tail -1
 }
 
+alias clb='git branch | grep -v "master" | xargs git branch -d'
+alias gcm='git commit -sm'
+alias gcb='git checkout -b'
 alias gp='git push `git_origin_or_fork` `cbranch`'
 alias gpl='git pull `git_origin_or_fork` `cbranch`'
 alias gc='git commit --verbose'
@@ -47,21 +45,13 @@ alias blush="git commit --amend --reuse-message HEAD"
 alias bx='bundle exec'
 alias rt='bx ruby -Itest'
 alias vs='vagrant ssh'
-alias knife='BUNDLE_GEMFILE=~/.chef/Gemfile bundle exec knife'
-
-vss() {
-  cd ~/src/vagrant
-  # Ignore error if SSH doesn't work due to the machine not being up.
-  vagrant ssh 2>/dev/null || (vagrant up && vagrant ssh)
-}
 
 alias ttc='tmux save-buffer -|pbcopy'
 alias tfc='tmux set-buffer "$(pbpaste)"'
 
 # Docker
-alias docks='docker stop $(docker ps -a -q)'
-alias dockr='docker rm $(docker ps -a -q)'
-
+alias ds='docker stop $(docker ps -a -q)'
+alias dr='docker rm $(docker ps -a -q)'
 
 # Sky
 alias l="ls -la"
@@ -73,6 +63,8 @@ alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resourc
 # Postgres
 alias pgstart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
 alias pgstop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
+alias pg-start="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 # Chef
 alias chef-up='eval "$(chef shell-init bash)"'
@@ -95,3 +87,10 @@ alias sv='eval "$(ssh-agent -s)" && ssh-add'
 
 alias nav='cd ~/dev/inlet/navigator/'
 alias c='clear'
+
+alias sed='gsed'
+
+# Git
+
+alias whatsmyip='curl -s https://am.i.mullvad.net/json | jq'
+

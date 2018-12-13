@@ -7,10 +7,10 @@ export CC=gcc
 # export ARM_ARCH="arm64"
 # export CFLAGS="-arch ${ARM_ARCH}"
 
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-  exec startx
-  # source ~/.xinitrc
-else
+ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+   exec startx
+   # source ~/.xinitrc
+ else
   SSH_ENV="$HOME/.ssh/environment"
 
   function start_agent {
@@ -33,7 +33,7 @@ else
   else
       start_agent;
   fi
-fi
+ fi
 
 NPM_PACKAGES="${HOME}/.node_packages"
 
@@ -42,4 +42,21 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.cargo/env
 
-VBoxClient-all || echo "VBoxClient clipboard"
+export PATH="$HOME/bin:$PATH"
+
+if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
+    source ~/.gnupg/.gpg-agent-info
+    export GPG_AGENT_INFO
+else
+    eval $(gpg-agent --daemon)
+fi
+
+# export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home"
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export GOPATH=${HOME}/dev/go
+
+export KITCHEN_LOCAL_YAML=".kitchen.local.yml"
+export KITCHEN_LOCAL_YML=".kitchen.local.yml"

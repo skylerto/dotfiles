@@ -7,23 +7,23 @@ rename_tmux_window_to_current_dir() {
   fi
 }
 
-ssh() {
-    if [[ -z $TMUX ]]; then
-        /usr/bin/ssh $@
-        return
-    fi
+# ssh() {
+#     if [[ -z $TMUX ]]; then
+#         /usr/bin/ssh $@
+#         return
+#     fi
 
-    local remote=${@: -1}
-    local old_name=$(tmux display-message -p '#W')
+#     local remote=${@: -1}
+#     local old_name=$(tmux display-message -p '#W')
 
-    if [[ -n $remote ]]; then
-        tmux rename-window "$remote"
-    fi
+#     if [[ -n $remote ]]; then
+#         tmux rename-window "$remote"
+#     fi
 
-    /usr/bin/ssh $@
+#     /usr/bin/ssh $@
 
-    tmux rename-window "$old_name"
-}
+#     tmux rename-window "$old_name"
+# }
 
 # PROMPT_COMMAND='if [[ "$bashrc" != "$PWD" && "$PWD" != "$HOME" && -e .bashrc ]]; then bashrc="$PWD"; . .bashrc; fi'
 PROMPT_COMMAND='if [[ "$profile" != "$PWD" && "$PWD" != "$HOME" && -e .profile ]]; then profile="$PWD"; . .profile; fi'

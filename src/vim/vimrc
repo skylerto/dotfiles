@@ -30,35 +30,36 @@ set showmode
 call plug#begin('~/.vim/plugged')
 
 
-  Plug 'flazz/vim-colorschemes'
-
   Plug 'neomake/neomake'
   Plug 'kassio/neoterm'
-  Plug 'janko-m/vim-test'
+  Plug 'skywind3000/asyncrun.vim'
+
+  " Plug 'janko-m/vim-test'
 
   Plug 'scrooloose/nerdtree'
   " Plug 'chrisbra/csv.vim'
+  Plug 'indellient/vim-h2o'
 
 
   " Plug 'scrooloose/syntastic'
   " Plug 'SirVer/ultisnips'
 
   " TPOPE FTW
-  Plug 'tpope/vim-rails'
-  " , { 'for': 'ruby' } " Utils for rails
+  " Plug 'tpope/vim-rails', { 'for': 'ruby' } " Utils for rails
   Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive' " Git
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-commentary' " Comment stuff out with gc in visual mode
   Plug 'tpope/vim-surround'
+  " Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-dispatch'
   " Plug 'tpope/vim-vinegar'
   " Plug 'thoughtbot/vim-rspec'
 
-  " Plug 'kien/ctrlp.vim' " Fuzzy finder
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  Plug 'PProvost/vim-ps1'
+  " Plug 'PProvost/vim-ps1'
 
 
   Plug 'codescv/vim-matchit' " Brackets
@@ -69,8 +70,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   ""  Plug 'leafgarland/typescript-vim'
 
-  Plug 'MarcWeber/vim-addon-mw-utils'
-  Plug 'tomtom/tlib_vim'
+  " Plug 'MarcWeber/vim-addon-mw-utils'
+  " Plug 'tomtom/tlib_vim'
 
   " Snipepts
   " Plug 'honza/vim-snippets'
@@ -83,43 +84,54 @@ call plug#begin('~/.vim/plugged')
   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'typescript' }
   " Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
 
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --go-completer' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --go-completer' }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
 
   Plug 'airblade/vim-gitgutter'
 
   Plug 'ervandew/supertab'
   Plug 'christoomey/vim-tmux-navigator'
 
-  Plug 'tpope/vim-dispatch'
 
   "" Plug 'vadv/vim-chef'
-  Plug 'albfan/ag.vim'
+  " Plug 'albfan/ag.vim'
+  " Plug 'rking/ag.vim'
   Plug 'ervandew/supertab'
 
   "" THEMES
   Plug 'altercation/vim-colors-solarized' " Colour Scheme
-
   " Plug 'junegunn/seoul256.vim'
-  Plug 'mhartington/oceanic-next'
-  Plug 'chriskempson/vim-tomorrow-theme'
+  " Plug 'mhartington/oceanic-next'
+  " Plug 'chriskempson/vim-tomorrow-theme'
+  " Plug 'flazz/vim-colorschemes'
 
 
-  Plug 'HerringtonDarkholme/yats.vim'
 
-  Plug 'jceb/vim-orgmode'
-  Plug 'tpope/vim-speeddating'
+  " Plug 'HerringtonDarkholme/yats.vim'
+
   Plug 'fatih/vim-go', { 'for': 'go' }
+  Plug 'rust-lang/rust.vim'
 
-  Plug 'derekwyatt/vim-scala'
+  " Plug 'derekwyatt/vim-scala'
   " Plug 'evanmiller/nginx-vim-syntax'
   Plug 'hashivim/vim-terraform'
 
-  Plug 'cakebaker/scss-syntax.vim'
+  " Plug 'cakebaker/scss-syntax.vim'
   " Plug 'ajmwager/vim-dues'
   " Plug 'dansomething/vim-eclim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
+
+
+let g:deoplete#enable_at_startup = 1
 
 " filetype plugin indent on
 
@@ -145,26 +157,17 @@ autocmd filetype html,css EmmetInstall
 let g:user_emmet_leader_key = '<C-x>'
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-" trigger configuration. do not use <tab> if you use https://github.com/valloric/youcompleteme.
+let g:supertabdefaultcompletiontype    = '<c-n>'
+let g:supertabcrmapping                = 0
+
 let g:ultisnipsexpandtrigger="<tab>"
 let g:ultisnipsjumpforwardtrigger="<c-b>"
 let g:ultisnipsjumpbackwardtrigger="<c-z>"
 
-let g:supertabdefaultcompletiontype    = '<c-n>'
-let g:supertabcrmapping                = 0
 let g:ultisnipsexpandtrigger           = '<tab>'
 let g:ultisnipsjumpforwardtrigger      = '<tab>'
 let g:ultisnipsjumpbackwardtrigger     = '<s-tab>'
-let g:ycm_key_list_select_completion   = ['<c-j>', '<c-n>', '<down>']
-let g:ycm_key_list_previous_completion = ['<c-k>', '<c-p>', '<up>']
 
-
-" if you want :ultisnipsedit to split your window.
-"let g:ultisnipseditsplit="vertical"
-
-"" ctrlp init
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " macosx/linux
 set wildignore+=.git/**,public/assets/**,vendor/**,log/**,tmp/**,cellar/**
 set wildignore+=app/assets/images/**,_site/**,home/.vim/bundle/**,pkg/**
@@ -180,7 +183,8 @@ set nobackup
 
 syntax enable
 set t_co=256 " 2000s plz
-" set textwidth=80
+set textwidth=100
+" set textwidth=120
 "120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
 " set showmatch     " show matching of: () [] {}
@@ -241,7 +245,6 @@ autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
 " nnoremap <leader>x :Dispatch npm run build.dev<CR>
 " nnoremap <leader>x !./bin/install.sh<CR>
 
-
 " Rename current file, thanks Gary Bernhardt via Ben Orenstein
 function! RenameFile()
   let old_name = expand('%')
@@ -289,7 +292,8 @@ autocmd BufNewFile,BufRead *.md,*.markdown set spell
 
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
 
-let g:solarized_termcolors = 16
+" let g:solarized_termcolors = 16
+let t_Co=256
 
 " Fix for WTF colors
 let g:solarized_termtrans = 1
@@ -297,11 +301,16 @@ let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
 set background=dark
 " set background=light
+"
 
+" .vimrc
 if filereadable(expand('~/.vim/plugged/vim-colors-solarized/colors/solarized.vim'))
-  colorscheme solarized
+  if has("gui_vimr")
+    colorscheme seoul256
+  else
+    colorscheme solarized
+  endif
 endif
-" colorscheme solarized
 " colorscheme material
 " colorscheme Tomorrow-Night
 
@@ -421,3 +430,17 @@ let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline_left_sep = '▶'
 " let g:airline_right_sep = '«'
 " let g:airline_right_sep = '◀'
+
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+map <C-f> :Rg<CR>
+
+" noremap <leader>b :rightbelow T nvim +H2oBuild && read junk && exit <CR>
+noremap <leader>b :Dispatch hab studio build . <CR>
+noremap <leader>l :rightbelow T nvim +H2oRun && read junk && exit <CR>
