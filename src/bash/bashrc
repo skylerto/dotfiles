@@ -1,8 +1,6 @@
 #!/bin/bash
 
-neofetch
-
-source /usr/share/chruby/chruby.sh
+# source /usr/share/chruby/chruby.sh
 for file in ~/.bash/*.bash; do
   source $file
 done
@@ -20,6 +18,6 @@ if [ -f '/home/skylerl/Downloads/google-cloud-sdk/path.bash.inc' ]; then source 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/skylerl/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/skylerl/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 
-export LS_OPTIONS='--color=auto'
-eval "`dircolors`"
-alias ls='ls $LS_OPTIONS'
+# export LS_OPTIONS='--color=auto'
+# eval "`dircolors`"
+# alias ls='ls $LS_OPTIONS'
