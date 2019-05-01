@@ -21,3 +21,4 @@ if [ -f '/home/skylerl/Downloads/google-cloud-sdk/completion.bash.inc' ]; then s
 # export LS_OPTIONS='--color=auto'
 # eval "`dircolors`"
 # alias ls='ls $LS_OPTIONS'
+# exec /Users/skylerl/local/bin/bash

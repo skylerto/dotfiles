@@ -4,7 +4,6 @@ set relativenumber
 set mouse=a
 set cursorline
 set nocompatible " No vi compatility, this first because it resets some options
-" let mapleader="\<Space>" " Mapleader, skylerto
 let mapleader="\<Space>" " Mapleader, skylerto
 filetype off
 set encoding=utf-8
@@ -14,6 +13,7 @@ set laststatus=2
 set ruler
 set wildmenu
 set showcmd
+
 " System Clipboard
 "" Arch
 set clipboard+=unnamedplus
@@ -25,24 +25,25 @@ nnoremap <C-;> :set invpaste paste?<CR>
 set pastetoggle=<C-;>
 set showmode
 
+" Install Vim Plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 " Do the plugins
 "set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
+  " Plug 'scrooloose/syntastic'
+
+  " Plug 'SirVer/ultisnips'
 
   Plug 'neomake/neomake'
   Plug 'kassio/neoterm'
-  Plug 'skywind3000/asyncrun.vim'
-
-  " Plug 'janko-m/vim-test'
 
   Plug 'scrooloose/nerdtree'
-  " Plug 'chrisbra/csv.vim'
-  Plug 'indellient/vim-h2o'
-
-
-  " Plug 'scrooloose/syntastic'
-  " Plug 'SirVer/ultisnips'
 
   " TPOPE FTW
   " Plug 'tpope/vim-rails', { 'for': 'ruby' } " Utils for rails
@@ -52,7 +53,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary' " Comment stuff out with gc in visual mode
   Plug 'tpope/vim-surround'
   " Plug 'tpope/vim-speeddating'
-  Plug 'tpope/vim-dispatch'
+  " Plug 'tpope/vim-dispatch'
   " Plug 'tpope/vim-vinegar'
   " Plug 'thoughtbot/vim-rspec'
 
@@ -64,11 +65,26 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'codescv/vim-matchit' " Brackets
 
+  " if has('nvim')
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " else
+  "   Plug 'Shougo/deoplete.nvim'
+  "   Plug 'roxma/nvim-yarp'
+  "   Plug 'roxma/vim-hug-neovim-rpc'
+  " endif
+
   " Languages
   Plug 'tpope/vim-markdown'
-  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  ""  Plug 'leafgarland/typescript-vim'
+  Plug 'fatih/vim-go', { 'for': 'go' }
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'cespare/vim-toml'
+
+  " Plug 'derekwyatt/vim-scala'
+  " Plug 'evanmiller/nginx-vim-syntax'
+  Plug 'hashivim/vim-terraform'
+
 
   " Plug 'MarcWeber/vim-addon-mw-utils'
   " Plug 'tomtom/tlib_vim'
@@ -81,17 +97,19 @@ call plug#begin('~/.vim/plugged')
 
   " Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
   " Plug 'Quramy/tsuquyomi'
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'typescript' }
+  "
+  "Typescript Plugins
+  " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  " Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " Plug 'mhartington/deoplete-typescript', { 'for': 'typescript' }
+  " Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 
+  " Plug 'leafgarland/typescript-vim'
   " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --go-completer' }
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+
+
+
 
   Plug 'airblade/vim-gitgutter'
 
@@ -115,55 +133,86 @@ call plug#begin('~/.vim/plugged')
 
   " Plug 'HerringtonDarkholme/yats.vim'
 
-  Plug 'fatih/vim-go', { 'for': 'go' }
-  Plug 'rust-lang/rust.vim'
-
-  " Plug 'derekwyatt/vim-scala'
-  " Plug 'evanmiller/nginx-vim-syntax'
-  Plug 'hashivim/vim-terraform'
-
   " Plug 'cakebaker/scss-syntax.vim'
   " Plug 'ajmwager/vim-dues'
   " Plug 'dansomething/vim-eclim'
+  Plug 'w0rp/ale'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+
+    " Plug 'mhartington/deoplete-typescript'
+
 call plug#end()
 
+au BufRead,BufNewFile * Neomake!
+autocmd! BufWritePost * Neomake!
+autocmd InsertChange * update | Neomake!
+let g:neomake_javascript_enabled_makers = ['eslint']
 
-let g:deoplete#enable_at_startup = 1
+autocmd Filetype ruby setlocal makeprg=rubocop
+let g:neomake_ruby_enabled_makers = ['rubocop']
+
+autocmd Filetype typescript setlocal makeprg=tslint
+" let g:neomake_typescript_enabled_makers = ['tslint']
+" let g:neomake_typescript_enabled_makers = ['']
+" autocmd BufWritePost *.ts :Neomake tslint
+" autocmd BufReadPre,FileReadPre *.ts :Neomake tslint
 
 " filetype plugin indent on
+"
+" deoplete
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_ignore_case = 1
+" let g:deoplete#auto_complete_start_length = 0
+" let g:auto_complete_start_length = 0
+" let g:deoplete#enable_refresh_always = 1
+" let g:deoplete#enable_debug = 1
+" let g:deoplete#enable_profile = 1
 
 
-let g:deoplete#enable_at_startup = 1
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-if !exists("g:ycm_semantic_triggers")
-   let g:ycm_semantic_triggers = {}
-    endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+" call deoplete#enable_logging('DEBUG', 'deoplete.log')
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:tern_request_timeout = 1
+" let g:tern_request_timeout = 6000
+" let g:tern#command = ["tern"]
+" let g:tern#arguments = ["--persistent"]
+" let g:deoplete#sources#tss#javascript_support = 1
+" let g:tsuquyomi_javascript_support = 1
+" let g:tsuquyomi_auto_open = 1
+" let g:tsuquyomi_disable_quickfix = 1
+
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
+" if !exists("g:ycm_semantic_triggers")
+"    let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_loc_list_height = 5
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_typescript_tsc_args = "--experimentalDecorators"
+" let g:syntastic_typescript_tsc_fname = ''
+" " let g:syntastic_typescript_tslint_args = "--config /Users/skylerl/dev/shuttleops/shuttleops-core/web/src/tslint.json"
+" " let g:syntastic_typescript_checkers = ['tslint', 'tsc']
+" let g:syntastic_typescript_checkers = []
 
 " emmet
 let g:user_emmet_mode='a'    "enable all function in all mode.
-autocmd filetype html,css EmmetInstall
 let g:user_emmet_leader_key = '<C-x>'
 " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 let g:supertabdefaultcompletiontype    = '<c-n>'
 let g:supertabcrmapping                = 0
 
+" Utilsnippets
 let g:ultisnipsexpandtrigger="<tab>"
 let g:ultisnipsjumpforwardtrigger="<c-b>"
 let g:ultisnipsjumpbackwardtrigger="<c-z>"
-
 let g:ultisnipsexpandtrigger           = '<tab>'
 let g:ultisnipsjumpforwardtrigger      = '<tab>'
 let g:ultisnipsjumpbackwardtrigger     = '<s-tab>'
@@ -183,8 +232,8 @@ set nobackup
 
 syntax enable
 set t_co=256 " 2000s plz
-set textwidth=100
-" set textwidth=120
+" set textwidth=100
+set textwidth=120
 "120  " switch line at 80 characters
 set scrolloff=5   " keep some distance to the bottom"
 " set showmatch     " show matching of: () [] {}
@@ -207,14 +256,6 @@ set listchars=tab:>-,trail:.,extends:>,precedes:<
 " TODO
 set tags=tags,.git/tags "Use commit hook tags, see ~/.git_template
 
-" Buffer Movement
-map <C-J> <C-W>j
-map <C-K> <C-W>k
-map <C-L> <C-W>l
-map <C-H> <C-W>h
-map <leader>d :bd<CR>
-nnoremap <C-n> :bprevious<CR>
-nnoremap <C-m> :bnext<CR>
 
 " Sane behavior on long lines
 nmap k gk
@@ -237,8 +278,8 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>wq :wq<CR>
 
 " Undo/Redo
-map <leader>z :u<CR> " undo
-map <leader>re :redo<CR> " redo
+map <leader>u :u<CR> " undo
+map <leader>z :redo<CR> " redo
 
 " Run the current ruby file.
 autocmd Filetype ruby nnoremap <leader>x :!ruby %<cr>
@@ -266,14 +307,12 @@ function! EditFile()
 endfunction
 map <leader>e :call EditFile()<cr>
 
+" Run ruby tests
 function! TestFile()
   let file = expand('%')
   exec ':T bundle exec rspec ' . file
 endfunction
 noremap <leader>tf :call TestFile()<cr>
-
-" Add a little love with leader l
-map <leader>l :exe ":normal i" . "♥"<CR>
 
 
 " Sane default tab-key, replaces Supertab.
@@ -285,17 +324,16 @@ function! InsertTabWrapper()
     return "\<c-p>"
   endif
 endfunction
-"imap <tab>   <c-r>=InsertTabWrapper()<cr>
-imap <s-tab> <c-n>
 
-autocmd BufNewFile,BufRead *.md,*.markdown set spell
+" What is the purpose ?
+imap <tab>   <c-r>=InsertTabWrapper()<cr>
+imap <s-tab> <c-p>
+imap <tab> <c-n>
 
-autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
-
-" let g:solarized_termcolors = 16
-let t_Co=256
 
 " Fix for WTF colors
+let t_Co=256
+" let g:solarized_termcolors = 16
 let g:solarized_termtrans = 1
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
@@ -319,87 +357,81 @@ endif
 " set guioptions-=r " Removes right hand scroll bar
 " set go-=L " Removes left hand scroll bar
 
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist'
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|dist'
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
-let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
-
+" let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 
 let g:ycm_key_list_select_completion = ['<TAB>']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+" let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 
+let NERDTreeShowHidden=1
 noremap - :NERDTreeToggle<CR>
+noremap <leader>- :NERDTreeFind<CR>
 noremap <leader>; <C-w>R
 
 noremap <leader>sv :source ~/.vimrc<CR>
-
-command! WQ wq
-command! Wq wq
-command! W w
-command! Q q
 
 " Set lines back to white
 " highlight LineNr ctermfg=white
 
 
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-L> <C-W>l
-
-" Solution for now
-nnoremap <BS> <C-W>h
-
-
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-let NERDTreeShowHidden=1
-
-autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
-
-" let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-" if matchstr(local_eslint, "^\/\\w") == ''
-"   let local_eslint = getcwd() . "/" . local_eslint
-" endif
-" if executable(local_eslint)
-"   let g:syntastic_javascript_eslint_exec = local_eslint
-" endif
 
 nnoremap <leader>s :w <CR>
 nnoremap <leader>v :vsp <CR>
-
-au BufRead,BufNewFile * Neomake!
-autocmd! BufWritePost * Neomake!
-autocmd InsertChange * update | Neomake!
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-autocmd Filetype ruby setlocal makeprg=rubocop
-let g:neomake_ruby_enabled_makers = ['rubocop']
 " let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
-
-" FZF
-nnoremap <C-p> :FZF<CR>
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 map <C-b> :Buffers<CR>
 map <C-t> :Tags<CR>
 
-
-nmap ,d :b#<bar>bd#<CR>
+" What is this for: nmap ,d :b#<bar>bd#<CR>
 
 nnoremap <leader>n :tabn <CR>
 " nnoremap <leader>x :T bundle exec rspec spec<CR>
 
+
+" File types
 au BufRead,BufNewFile *.rb setfiletype ruby
 au BufRead,BufNewFile *.gemspec setfiletype ruby
 au BufRead,BufNewFile Rakefile setfiletype ruby
 au BufRead,BufNewFile Vagrantfile setfiletype ruby
 au BufRead,BufNewFile Jenkinsfile setfiletype groovy
+au BufRead,BufNewFile *.md setlocal spell
+au BufNewFile,BufRead *.md,*.markdown set spell
 
-" Useful maps
+autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType sql setlocal shiftwidth=2 tabstop=2 noexpandtab
+au FileType html,css EmmetInstall
+" autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
+
+
+" GO Config
+au FileType go set expandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+au FileType go nnoremap <leader>gd :GoDef<CR>
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
+" au FileType go nmap <leader> <Plug>(go-def)
+
+
+" Useful maps for TERMINAL
 " hide/close terminal
 nnoremap <silent> ,th :call neoterm#close()<cr>
 " clear terminal
@@ -408,7 +440,22 @@ nnoremap <silent> ,tl :call neoterm#clear()<cr>
 nnoremap <silent> ,tc :call neoterm#kill()<cr>
 tnoremap <Esc> <C-\><C-n>
 
-" I hate myself
+" Buffer Movement
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+map <leader>d :bd<CR>
+nnoremap <C-n> :bprevious<CR>
+nnoremap <C-m> :bnext<CR>
+
+" nnoremap <C-J> <C-W>j
+" nnoremap <C-K> <C-W>k
+" nnoremap <C-L> <C-W>l
+" " Solution for now
+" nnoremap <BS> <C-W>h
+
+" I hate myself, no arrow keys in normal mode
 imap jk <Esc>
 imap jj <esc>
 noremap <Up> <Nop>
@@ -420,7 +467,10 @@ map <leader>t :exe ":normal i" . strftime('%c')<CR>
 
 nnoremap <leader>t :r! date<CR>
 " inoremap <F5> <C-R>=strftime("%c")<CR>
-"
+
+
+
+" AIRLINE
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
 " let g:airline#extensions#tabline#enabled = 1
@@ -431,7 +481,14 @@ let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline_right_sep = '«'
 " let g:airline_right_sep = '◀'
 
-
+" FZF Options
+nnoremap <C-p> :FZF<CR>
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git --ignore node_modules -l -g ""'
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
@@ -442,5 +499,20 @@ command! -bang -nargs=* Rg
 map <C-f> :Rg<CR>
 
 " noremap <leader>b :rightbelow T nvim +H2oBuild && read junk && exit <CR>
-noremap <leader>b :Dispatch hab studio build . <CR>
-noremap <leader>l :rightbelow T nvim +H2oRun && read junk && exit <CR>
+" noremap <leader>b :Dispatch hab studio build . <CR>
+" noremap <leader>l :rightbelow T nvim +H2oRun && read junk && exit <CR>
+
+
+" noremap <leader>f :set formatoptions-=t <CR>
+"
+
+" Because sometimes I hold shift to long, sue me...
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+
+
+" Funzies
+" Add a little love with leader l
+map <leader>l :exe ":normal i" . "♥"<CR>

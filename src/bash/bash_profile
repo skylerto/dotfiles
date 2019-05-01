@@ -60,3 +60,4 @@ export GOPATH=${HOME}/dev/go
 
 export KITCHEN_LOCAL_YAML=".kitchen.local.yml"
 export KITCHEN_LOCAL_YML=".kitchen.local.yml"
+export PATH="/usr/local/opt/libarchive/bin:$PATH"

@@ -35,7 +35,7 @@ export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 
 export PATH=$PATH:/usr/local/Cellar/ruby/2.3.1/bin
 
-export PATH=~/.bin/:$PATH
+export PATH=~/bin/:$PATH
 export PATH=$HOME/node/bin:$PATH
 
 #export NVM_DIR="$HOME/.nvm"
