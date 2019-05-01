@@ -141,20 +141,29 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
 
 
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+ " For async completion
+  Plug 'Shougo/deoplete.nvim'
+ " For Denite features
+  Plug 'Shougo/denite.nvim'
+
+
     " Plug 'mhartington/deoplete-typescript'
 
 call plug#end()
 
-au BufRead,BufNewFile * Neomake!
-autocmd! BufWritePost * Neomake!
-autocmd InsertChange * update | Neomake!
-let g:neomake_javascript_enabled_makers = ['eslint']
+" au BufRead,BufNewFile * Neomake!
+" autocmd! BufWritePost * Neomake!
+" autocmd InsertChange * update | Neomake!
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
-autocmd Filetype ruby setlocal makeprg=rubocop
-let g:neomake_ruby_enabled_makers = ['rubocop']
+" autocmd Filetype ruby setlocal makeprg=rubocop
+" let g:neomake_ruby_enabled_makers = ['rubocop']
 
 autocmd Filetype typescript setlocal makeprg=tslint
-" let g:neomake_typescript_enabled_makers = ['tslint']
+let g:neomake_typescript_enabled_makers = ['tslint']
 " let g:neomake_typescript_enabled_makers = ['']
 " autocmd BufWritePost *.ts :Neomake tslint
 " autocmd BufReadPre,FileReadPre *.ts :Neomake tslint
@@ -378,7 +387,6 @@ noremap <leader>sv :source ~/.vimrc<CR>
 
 nnoremap <leader>s :w <CR>
 nnoremap <leader>v :vsp <CR>
-" let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
 map <C-b> :Buffers<CR>
 map <C-t> :Tags<CR>
@@ -429,6 +437,22 @@ let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 " au FileType go nmap <leader> <Plug>(go-def)
+
+
+"  linters
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'typescript': ['tslint'],
+\}
+" enable filetypes using the associated linting program
+" Recently changed to test if using npx enforces local linters instead of global
+" let g:ale_fixers = {
+" \   'javascript': ['eslint'],
+" \   'javascript.jsx': ['eslint'],
+" \   'typescript': ['tslint'],
+" \}
+" lint on saves
+let g:ale_fix_on_save = 1
 
 
 " Useful maps for TERMINAL
