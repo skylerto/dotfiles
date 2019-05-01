@@ -94,3 +94,4 @@ alias sed='gsed'
 
 alias whatsmyip='curl -s https://am.i.mullvad.net/json | jq'
 
+alias r='ranger'

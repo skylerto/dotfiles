@@ -9,8 +9,8 @@ shopt -s nocaseglob
 # NeoVim as default editor
 export EDITOR=nvim
 
-# export TERM=screen-256color
-export TERM=xterm
+export TERM=screen-256color
+# export TERM=xterm-256color
 
 # Plenty big history for searching backwards and doing analysis
 export HISTFILESIZE=100000
