@@ -13,6 +13,9 @@ set laststatus=2
 set ruler
 set wildmenu
 set showcmd
+set notimeout
+set iskeyword+=-
+set ff=unix
 
 " System Clipboard
 "" Arch
@@ -60,7 +63,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
-  " Plug 'PProvost/vim-ps1'
+  Plug 'PProvost/vim-ps1'
 
 
   Plug 'codescv/vim-matchit' " Brackets
@@ -147,7 +150,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/deoplete.nvim'
  " For Denite features
   Plug 'Shougo/denite.nvim'
-
 
     " Plug 'mhartington/deoplete-typescript'
 
@@ -259,8 +261,8 @@ set tabstop=2 " Tabs are 2 spaces
 set backspace=2 " Backspace deletes 2 spaces
 set shiftwidth=2 " Even if there are tabs, preview as 2 spaces
 
-set list " Highlight trailings, stolen from @teoljungberg
-set listchars=tab:>-,trail:.,extends:>,precedes:<
+" set list " Highlight trailings, stolen from @teoljungberg
+" set listchars=tab:>-,trail:.,extends:>,precedes:<
 
 " TODO
 set tags=tags,.git/tags "Use commit hook tags, see ~/.git_template
@@ -342,10 +344,11 @@ imap <tab> <c-n>
 
 " Fix for WTF colors
 let t_Co=256
+" let g:solarized_termcolors=256
 " let g:solarized_termcolors = 16
 let g:solarized_termtrans = 1
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "high"
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
 set background=dark
 " set background=light
 "
@@ -358,8 +361,9 @@ if filereadable(expand('~/.vim/plugged/vim-colors-solarized/colors/solarized.vim
     colorscheme solarized
   endif
 endif
-" colorscheme material
+
 " colorscheme Tomorrow-Night
+" colorscheme material
 
 " set guifont=Inconsolata:h12
 " set guioptions-=T " Removes top toolbar
@@ -392,8 +396,6 @@ map <C-b> :Buffers<CR>
 map <C-t> :Tags<CR>
 
 " What is this for: nmap ,d :b#<bar>bd#<CR>
-
-nnoremap <leader>n :tabn <CR>
 " nnoremap <leader>x :T bundle exec rspec spec<CR>
 
 
@@ -403,17 +405,23 @@ au BufRead,BufNewFile *.gemspec setfiletype ruby
 au BufRead,BufNewFile Rakefile setfiletype ruby
 au BufRead,BufNewFile Vagrantfile setfiletype ruby
 au BufRead,BufNewFile Jenkinsfile setfiletype groovy
+au BufRead,BufNewFile .studiorc setfiletype sh
+au BufRead,BufNewFile .studiorc set syntax=sh
+au BufRead,BufNewFile .studio/* setfiletype sh
+au BufRead,BufNewFile .studio/* set syntax=sh
 au BufRead,BufNewFile *.md setlocal spell
 au BufNewFile,BufRead *.md,*.markdown set spell
 
 autocmd FileType go,gitcommit,qf,gitset setlocal nolist " Go fmt will use tabs
-autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 noexpandtab
+autocmd FileType html,css setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
 autocmd FileType sql setlocal shiftwidth=2 tabstop=2 noexpandtab
 au FileType html,css EmmetInstall
 " autocmd FileType java setlocal shiftwidth=2 tabstop=2 noexpandtab
 
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 noexpandtab
+au FileType typescript nnoremap <C-t> :pop<CR>
 
 " GO Config
 au FileType go set expandtab
@@ -437,7 +445,6 @@ let g:ale_sign_warning = '⚠'
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 " au FileType go nmap <leader> <Plug>(go-def)
-
 
 "  linters
 let g:ale_linters = {
@@ -481,7 +488,7 @@ nnoremap <C-m> :bnext<CR>
 
 " I hate myself, no arrow keys in normal mode
 imap jk <Esc>
-imap jj <esc>
+imap jj <Esc>
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -539,4 +546,10 @@ command! Q q
 
 " Funzies
 " Add a little love with leader l
-map <leader>l :exe ":normal i" . "♥"<CR>
+" map <leader>l :exe ":normal i" . "♥"<CR>
+
+
+" nnoremap <CR> <Nop>
+
+nnoremap <leader>n :tabn <CR>
+nnoremap <leader>p :tabp <CR>

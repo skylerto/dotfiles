@@ -33,6 +33,7 @@ alias gb='git branch --verbose'
 alias grc='git rebase --continue'
 alias gl='git log --oneline'
 alias gco='git checkout'
+alias gfo='git fetch origin'
 if type -t __git_complete > /dev/null; then
   __git_complete gco _git_checkout
 fi
@@ -71,6 +72,8 @@ alias chef-up='eval "$(chef shell-init bash)"'
 
 # alias vim='echo "use vi please"'
 alias vi='nvim'
+alias vim='nvim'
+# alias vimdiff='nvim -d'
 
 alias cx='chef exec'
 alias today='date +"%Y-%m-%d"'
