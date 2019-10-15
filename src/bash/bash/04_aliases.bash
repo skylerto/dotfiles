@@ -47,6 +47,7 @@ alias bx='bundle exec'
 alias rt='bx ruby -Itest'
 alias vs='vagrant ssh'
 
+alias t='tmux'
 alias ttc='tmux save-buffer -|pbcopy'
 alias tfc='tmux set-buffer "$(pbpaste)"'
 
