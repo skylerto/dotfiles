@@ -1,1 +1,7 @@
 .DS_Store
+
+src/config/config/joplin-desktop
+src/config/config/spotify/
+src/config/config/infracost/
+src/config/config/Autodesk/
+src/config/config/gcloud/
