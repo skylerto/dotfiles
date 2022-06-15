@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -w; history -c; history -r"
+
 # source /usr/share/chruby/chruby.sh
 for file in ~/.bash/*.bash; do
   source $file
@@ -11,6 +19,7 @@ done
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+export FZF_DEFAULT_COMMAND="rg --files --follow --hidden --glob '!.git/*' --glob '!sorbet/**' --glob '!tags' --glob '!yarn.lock' --glob '!package.json' --glob '!vendor/**'"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/skylerl/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/skylerl/Downloads/google-cloud-sdk/path.bash.inc'; fi

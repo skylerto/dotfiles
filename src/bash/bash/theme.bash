@@ -3,6 +3,7 @@
 source ~/.bash/.git-prompt.sh
 # Start from scratch
 PS1=''
+PS1+='\[$GREY\]($(date +%T)) '
 
 # Set hostname if not on MacBook (home) and not in tmux (where hostname is shown
 # right in the prompt).

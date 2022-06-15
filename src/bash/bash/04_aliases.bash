@@ -56,8 +56,8 @@ alias ds='docker stop $(docker ps -a -q)'
 alias dr='docker rm $(docker ps -a -q)'
 
 # Sky
-alias l="ls -la"
-alias ll="ls -la"
+alias l="exa -la"
+alias ll="exa -la"
 alias g="git"
 
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
@@ -72,6 +72,7 @@ alias pg-stop="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.postgresql.
 alias chef-up='eval "$(chef shell-init bash)"'
 
 # alias vim='echo "use vi please"'
+alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 # alias vimdiff='nvim -d'
@@ -99,3 +100,8 @@ alias sed='gsed'
 alias whatsmyip='curl -s https://am.i.mullvad.net/json | jq'
 
 alias r='ranger'
+
+alias tm='tmux'
+
+alias git_config='cat ../git_config >> .git/config'
+alias swagger='swagger-codegen'
